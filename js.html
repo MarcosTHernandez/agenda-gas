@@ -6,6 +6,9 @@ function insertarContacto()
     let nombre = document.getElementById('nombre').value;
     let correo = document.getElementById('correo').value;
 
+    // Cerrar modal    
+    bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
+
     // Eliminar tabla
     eliminarTabla();
 
