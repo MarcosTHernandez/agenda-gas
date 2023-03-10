@@ -37,7 +37,6 @@ function contactoInsertadoCorrectamente()
 
   // Mostramos la tabla
   crearTablaContactos();
-
 }
 
 function contactoInsertadoError()
@@ -46,11 +45,9 @@ function contactoInsertadoError()
 
   // Eliminar loader
   eliminarLoader();
-
   
   // Mostramos la tabla
   crearTablaContactos();
-
 }
 
 function crearTablaContactos()
@@ -83,6 +80,14 @@ function crearTablaContactosCorrectamente(obj)
         celda.textContent = obj[0][i];
         primeraFila.appendChild(celda);
     }
+
+    // Agregar columna "OPCIONES"
+    let celdaOpciones = document.createElement('td');
+    celdaOpciones.textContent = "OPCIONES";
+    celdaOpciones.classList.add('text-center');
+    primeraFila.appendChild(celdaOpciones);
+
+    // Agregar la fila al header de la tabla
     tablaHeader.appendChild(primeraFila);
     tabla.appendChild(tablaHeader);
 
@@ -96,6 +101,8 @@ function crearTablaContactosCorrectamente(obj)
             celda.textContent = obj[i][j];
             fila.appendChild(celda);
         } 
+        // Agregar los botones a la fila
+        fila.appendChild(crearCeldaBotones(i+1));
         tablaBody.appendChild(fila);
     }                
 
@@ -112,8 +119,69 @@ function crearTablaContactosCorrectamente(obj)
     crearNotificacionOK('Contactos obtenidos correctamente', 'Todo en orden');
 
     // Eliminaremos el loader
-    eliminarLoader();
+    eliminarLoader();   
+}
 
+function crearCeldaBotones(numFila)
+{
+    // Crear celda
+    let celda = document.createElement('td');
+    celda.classList.add('text-center');
+
+    // Crear botón "BORRAR"
+    let botonBorrar         = document.createElement('button');
+    botonBorrar.onclick     = () => borrarContacto(numFila);
+    botonBorrar.classList.add('btn', 'btn-danger', 'm-1');    
+
+    // Icono borrar
+    let iconoBorrar = document.createElement('i');
+    iconoBorrar.classList.add('bi', 'bi-trash');
+    botonBorrar.appendChild(iconoBorrar);
+
+    // Crear botón "MODIFICAR"
+    let botonModificar         = document.createElement('button');
+    //botonModificar.onclick     = () => borrarContacto(numFila);
+    botonModificar.classList.add('btn', 'btn-warning', 'm-1');   
+
+    // Icono modificar
+    let iconoModificar = document.createElement('i');
+    iconoModificar.classList.add('bi', 'bi-pencil-square');
+    botonModificar.appendChild(iconoModificar);
+
+    // Agregar botones a la celda
+    celda.appendChild(botonBorrar);
+    celda.appendChild(botonModificar);
+
+    return celda;
+
+}
+
+function borrarContacto(numFila) 
+{
+     // Eliminar tabla
+     eliminarTabla();
+
+    // Crear loader
+    crearLoaderPuntos('divContactos');
+
+    google.script.run
+    .withSuccessHandler(contactoBorradoCorrectamente)
+    .withFailureHandler(contactoBorradoError)
+    .borrarContacto(numFila);
+}
+
+function contactoBorradoCorrectamente() 
+{    
+    crearNotificacionOK('Contacto borrado correctamente', 'BORRADO OK');
+    eliminarLoader();
+    crearTablaContactos();
+}
+
+function contactoBorradoError()
+{
+    crearNotificacionError('No se ha podido borrar el contacto', 'ERROR');
+    eliminarLoader();
+    crearTablaContactos();
 }
 
 function crearTablaContactosError()
