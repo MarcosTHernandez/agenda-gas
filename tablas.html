@@ -1,0 +1,128 @@
+<script>
+
+function eliminarTabla()
+{ 
+    let tabla = document.getElementById('tablaContactos');
+    if(tabla) tabla.remove();
+}
+
+function crearTablaContactos()
+{
+    limpiar();
+
+    google.script.run
+    .withSuccessHandler(crearTablaContactosCorrectamente)
+    .withFailureHandler(crearTablaContactosError)
+    .obtenerContactos();
+}
+
+function crearTablaContactosError()
+{
+    // Mostrar notificación de error
+    crearNotificacionError('No se han podido leer los contactos', 'ERROR');
+
+    // Eliminaremos el loader
+    eliminarLoader();
+}
+
+function crearTablaContactosCorrectamente(obj)
+{
+    tabla           = document.createElement('table');
+    tabla.id        = 'tablaContactos';
+    
+    let tablaHeader = document.createElement('thead');
+    let tablaBody   = document.createElement('tbody');
+
+    // Header de la tabla
+    let primeraFila = document.createElement('tr');
+    for(let i = 0; i < obj[0].length; i++)
+    {
+        let celda = document.createElement('td');
+        celda.textContent = obj[0][i];
+        primeraFila.appendChild(celda);
+    }
+
+    // Agregar columna "OPCIONES"
+    let celdaOpciones = document.createElement('td');
+    celdaOpciones.textContent = "OPCIONES";
+    celdaOpciones.classList.add('text-center');
+    primeraFila.appendChild(celdaOpciones);
+
+    // Agregar la fila al header de la tabla
+    tablaHeader.appendChild(primeraFila);
+    tabla.appendChild(tablaHeader);
+
+    // Body de la tabla
+    for(let i = 1; i < obj.length; i++) 
+    {
+        let fila = document.createElement('tr');
+        for(let j = 0; j < obj[i].length; j++)
+        {
+            let celda = document.createElement('td');
+            celda.textContent = obj[i][j];
+            fila.appendChild(celda);
+
+            // Si es el quinto elemento de la fila
+            if(j == 4)
+            {
+                // Creamos la imagen
+                celda.textContent = '';
+                let imagen = document.createElement('img');
+                imagen.classList.add('img-fluid', 'rounded');
+                imagen.src = obj[i][j];
+                celda.appendChild(imagen);
+            }
+        } 
+        // Agregar los botones a la fila
+        fila.appendChild(crearCeldaBotones(i + 1, obj[i]));
+        tablaBody.appendChild(fila);
+    }                
+
+    // Agregamos clases a la cabecera
+    tablaHeader.classList.add('table-dark');
+    // Agregamos el cuerpo a la tabla                
+    tabla.appendChild(tablaBody);
+    // Agregamos clases a la tabla
+    tabla.classList.add('table', 'table-striped', 'border', 'border-4', 'border-dark');
+    // Agregamos tabla a la página
+    document.getElementById('divContactos').appendChild(tabla);   
+
+    // Eliminaremos el loader
+    eliminarLoader();   
+}
+
+function crearCeldaBotones(numFila, datosContacto)
+{
+    // Crear celda
+    let celda = document.createElement('td');
+    celda.classList.add('text-center');
+
+    // Crear botón "BORRAR"
+    let botonBorrar         = document.createElement('button');
+    botonBorrar.onclick     = () => borrarContacto(numFila);
+    botonBorrar.classList.add('btn', 'btn-danger', 'm-1');    
+
+    // Icono borrar
+    let iconoBorrar = document.createElement('i');
+    iconoBorrar.classList.add('bi', 'bi-trash');
+    botonBorrar.appendChild(iconoBorrar);
+
+    // Crear botón "MODIFICAR"
+    let botonModificar         = document.createElement('button');
+    botonModificar.onclick     = () => abrirModalModificarContacto(numFila, datosContacto);
+    botonModificar.classList.add('btn', 'btn-warning', 'm-1');   
+
+    // Icono modificar
+    let iconoModificar = document.createElement('i');
+    iconoModificar.classList.add('bi', 'bi-pencil-square');
+    botonModificar.appendChild(iconoModificar);
+
+    // Agregar botones a la celda
+    celda.appendChild(botonBorrar);
+    celda.appendChild(botonModificar);
+
+    return celda;
+}
+
+
+</script>
