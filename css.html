@@ -20,9 +20,9 @@
 }
 body
 {
-  display: flex; 
+  display:        flex; 
   flex-direction: column;
-  min-height: 100vh;
+  min-height:     100vh;
 }
 header
 {
@@ -45,8 +45,8 @@ header
 
 .icono-notificacion
 {
-    font-size: 1.5rem;
-    padding: .5rem;
+    font-size:  1.5rem;
+    padding:    .5rem;
 }
 
 .div-notificaciones
@@ -57,12 +57,12 @@ header
 .subir-arriba
 {
   background-color: var(--color-gris-claro);
-  position: fixed;
-  transition: all .4s ease-in-out;
-  transform: scale(0);
-  bottom: 1%;
-  right: 1%;
-  z-index: 10;
+  position:         fixed;
+  transition:       all .4s ease-in-out;
+  transform:        scale(0);
+  bottom:           1%;
+  right:            1%;
+  z-index:          10;
 }
 
 .img-contacto
@@ -72,24 +72,39 @@ header
   width:      12rem;
 }
 
+.img-form
+{
+  height:         18rem;
+  width:          18rem;
+  border:         1px solid black;
+  border-radius:  .5rem;
+  object-fit:     cover;
+}
+
+.img-tabla
+{
+  object-fit: cover;
+  height: 4rem;
+}
+
 /* LOADER ANILLO */
 .lds-ring {
-  display: inline-block;
+  display:  inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width:    80px;
+  height:   80px;
 }
 .lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid var(--color-azul-oscuro);
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: var(--color-azul-oscuro) transparent transparent transparent;
+  box-sizing:     border-box;
+  display:        block;
+  position:       absolute;
+  width:          64px;
+  height:         64px;
+  margin:         8px;
+  border:         8px solid var(--color-azul-oscuro);
+  border-radius:  50%;
+  animation:      lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color:   var(--color-azul-oscuro) transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
@@ -111,35 +126,35 @@ header
 
 /* LOADER PUNTOS */
 .lds-ellipsis {
-  display: inline-block;
+  display:  inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width:    80px;
+  height:   80px;
 }
 .lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--color-azul-oscuro);
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  position:                   absolute;
+  top:                        33px;
+  width:                      13px;
+  height:                     13px;
+  border-radius:              50%;
+  background:                 var(--color-azul-oscuro);
+  animation-timing-function:  cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
+  left:       8px;
+  animation:  lds-ellipsis1 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
+  left:       8px;
+  animation:  lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
+  left:       32px;
+  animation:  lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
+  left:       56px;
+  animation:  lds-ellipsis3 0.6s infinite;
 }
 @keyframes lds-ellipsis1 {
   0% {
