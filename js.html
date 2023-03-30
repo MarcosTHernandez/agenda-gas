@@ -47,7 +47,7 @@ function insertarContacto()
     let contacto    = guardarDatosContacto();
     let archivo     = document.getElementById('imagen').files[0];
 
-    if(archivo) subirImagen(contacto, archivo);
+    if(archivo) subirImagenInsertar(contacto, archivo);
     else
     {
         google.script.run
@@ -70,7 +70,7 @@ function guardarDatosContacto()
     return contacto;
 }
 
-function subirImagen(contacto, archivo)
+function subirImagenInsertar(contacto, archivo)
 {
     let fr = new FileReader();
     fr.readAsArrayBuffer(archivo);
@@ -117,16 +117,40 @@ function modificarContacto(numFila)
     // Cerrar modal
     bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).hide();
 
-    // Obtener nuevos DATOS a partir del formulario
-    let nombre      = document.getElementById('nombre').value;
-    let apellidos   = document.getElementById('apellidos').value;
-    let correo      = document.getElementById('correo').value;
-    let telf        = document.getElementById('telf').value;    
-    
-    google.script.run
-    .withSuccessHandler(contactoModificadoCorrectamente)
-    .withFailureHandler(contactoModificadoError)
-    .modificarContacto(numFila, {nombre, apellidos, correo, telf});
+    let contacto    = guardarDatosContacto();
+    contacto.fila   = numFila;
+
+    let archivo     = document.getElementById('imagen').files[0];
+
+    if(archivo) subirImagenModificar(contacto, archivo);
+    else
+    {
+        google.script.run
+        .withSuccessHandler(contactoModificadoCorrectamente)
+        .withFailureHandler(contactoModificadoError)
+        .modificarContacto(contacto);
+    }
+}
+
+function subirImagenModificar(contacto, archivo)
+{
+    let fr = new FileReader();
+    fr.readAsArrayBuffer(archivo);
+
+    fr.onload = function()
+    {
+        let imagen =
+        {
+            nombre  : archivo.name,
+            tipo    : archivo.type,
+            datos   : Array.from(new Int8Array(this.result))
+        };
+
+        google.script.run
+            .withSuccessHandler(contactoModificadoCorrectamente)
+            .withFailureHandler(contactoModificadoError)
+            .modificarContacto(contacto, imagen);
+    }
 }
 
 function contactoModificadoCorrectamente() 
