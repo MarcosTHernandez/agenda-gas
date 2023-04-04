@@ -1,4 +1,7 @@
 <script>
+//////////////////////
+// CONSTANTES
+//////////////////////
 
 const ICONO_CHECK               = 'bi-check2-square';
 const ICONO_PAPELERA            = 'bi-trash';
@@ -13,6 +16,11 @@ const LOTTIE_ERROR              = 'https://assets4.lottiefiles.com/packages/lf20
 const LOTTIE_ADVERTENCIA        = 'https://assets1.lottiefiles.com/packages/lf20_Tkwjw8.json';
 const LOTTIE_LOADER_NUBE        = 'https://assets1.lottiefiles.com/private_files/lf30_kcosxgdt.json'
 const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf20_x62chJ.json'
+
+//////////////////////
+// EVENTOS
+//////////////////////
+
 
     // Botón subir
     window.addEventListener('scroll', function() 
@@ -33,6 +41,40 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
         document.getElementById('imgForm').src = URL.createObjectURL(this.files[0])
     });
 
+    // dragover
+    document.getElementById('imgForm').addEventListener("dragover", function(event)
+    {
+        event.preventDefault();
+        this.style.filter = 'opacity(0%)';
+        document.getElementById('cajaIconoForm').style.display = 'flex';   
+    });
+
+    // dragleave
+    document.getElementById('imgForm').addEventListener("dragleave", function(event)
+    {
+        this.style.filter = 'opacity(100%)';
+        document.getElementById('cajaIconoForm').style.display = 'none';     
+    });
+    
+    // drop
+    document.getElementById('imgForm').addEventListener("drop", function(event)
+    {
+        event.preventDefault();
+
+        let ficheros = event.dataTransfer.files;
+
+        // Pasamos los archivos al "input"
+        document.getElementById('imagen').files = ficheros;
+
+        // Creamos una URL para mostrar la imagen
+        document.getElementById('imgForm').src = URL.createObjectURL(ficheros[0]);
+
+        // Mostramos la imagen y quitamos zona de carga
+        this.style.filter = 'opacity(100%)';
+        document.getElementById('cajaIconoForm').style.display = 'none';
+
+    });
+
     function subirArriba()
     {
         document.body.scrollTop = 0;
@@ -51,6 +93,16 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
         crearTarjetasContactos();
         eliminarLoader();
     }
+
+
+
+
+
+
+
+
+
+
 
     // INSERTAR CONTACTO
     function insertarContacto()
