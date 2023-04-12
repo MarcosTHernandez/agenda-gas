@@ -75,6 +75,51 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
 
     });
 
+    document.getElementById('copiarCorreo').addEventListener("click", function(event)
+    {   
+        copiarContenido(this, 'correoInfoContacto');
+    });
+
+    document.getElementById('copiarTelf').addEventListener("click", function(event)
+    {
+        copiarContenido(this, 'telfInfoContacto');
+    });
+
+    function copiarContenido(icono, id)
+    {
+        let texto = document.getElementById(id).textContent;
+        
+        navigator.clipboard.writeText(texto)
+        .then(() => 
+        {
+            icono.classList.remove('bi-clipboard');
+            icono.classList.add('bi-check-lg');
+            icono.title = 'Copiado';            
+            bootstrap.Tooltip.getOrCreateInstance(icono).show();
+            restaurarIcono(icono);
+        })
+    }
+
+    function restaurarIcono(icono)
+    {
+        setTimeout(function()
+        {
+            icono.classList.remove('bi-check-lg');
+            icono.classList.add('bi-clipboard');
+            icono.title = '';
+            bootstrap.Tooltip.getInstance(icono).dispose();                
+        }, 2000);
+
+    }
+
+
+
+    //////////////////////////////////////////////
+    //////////////////////////////////////////////
+    //////////////////////////////////////////////
+
+
+
     function subirArriba()
     {
         document.body.scrollTop = 0;
@@ -93,7 +138,6 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
         crearTarjetasContactos();
         eliminarLoader();
     }
-
 
 
 
@@ -282,4 +326,6 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl)
 })
+
+
 </script>
