@@ -14,9 +14,9 @@ function crearTarjetasContactos()
     limpiar();
 
     google.script.run
-    .withSuccessHandler(crearTarjetasCorrectamente)
-    .withFailureHandler(crearTarjetasError)
-    .obtenerDatos();
+        .withSuccessHandler(crearTarjetasCorrectamente)
+        .withFailureHandler(crearTarjetasError)
+        .obtenerDatos();
 }
 
 function crearTarjetasError()
