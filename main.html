@@ -1,13 +1,8 @@
 <main>
     <!-- Botones superiores -->
     <div class="d-flex justify-content-center my-3">
-        <!-- <button type="button" class="btn btn-success m-2" onclick="crearTarjetasCuadradas()">
-            <i class="bi bi-postcard"></i>
-        </button>
-        <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()">
-            <i class="bi bi-table"></i>
-        </button> -->
-        <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">
+       
+        <button id="insertarContacto" type="button" class="btn btn-primary m-2">
             <i class="bi bi-person-plus"></i>
         </button>
         <button type="button" class="btn btn-warning m-2" onclick="importarContactos()">+ 5</button>
@@ -17,8 +12,7 @@
               <i class="bi bi-gear fs-5"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="deplegableEstilos">
-              <li><a class="dropdown-item" id="tarjetasEstiloTabla">Estilo tabla</a></li>
-              <li><a class="dropdown-item" id="tarjetasEstiloFila">Estilo fila</a></li>
+
               <li><a class="dropdown-item" id="tarjetasEstilo1">Estilo tarjeta 1</a></li>
               <li><a class="dropdown-item" id="tarjetasEstilo2">Estilo tarjeta 2</a></li>
               <li><a class="dropdown-item" id="tarjetasEstilo3">Estilo tarjeta 3</a></li>
