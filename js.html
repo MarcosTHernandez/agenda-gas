@@ -17,9 +17,6 @@ const LOTTIE_ADVERTENCIA        = 'https://assets1.lottiefiles.com/packages/lf20
 const LOTTIE_LOADER_NUBE        = 'https://assets1.lottiefiles.com/private_files/lf30_kcosxgdt.json'
 const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf20_x62chJ.json'
 
-
-
-
     function copiarContenido(icono, id)
     {
         let texto = document.getElementById(id).textContent;
@@ -46,33 +43,12 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
         }, 2000);
     }
 
-
-
-    //////////////////////////////////////////////
-    //////////////////////////////////////////////
-    //////////////////////////////////////////////
-
-
-
-    function subirArriba()
-    {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-
     function limpiar()
     {
         eliminarTarjetas();    
         crearLoaderLottie('divContactos',LOTTIE_LOADER_AVION_PAPEL);
     }
-
-    function mostrar()
-    {
-        crearTarjetas();
-    }
-
     
-
     function extraerContactos(datos)
     {
         let contactos = [];
@@ -82,7 +58,6 @@ const LOTTIE_LOADER_AVION_PAPEL  = 'https://assets10.lottiefiles.com/packages/lf
         }
         return contactos;
     }
-
     
     // Habilitar popovers
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
